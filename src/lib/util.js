@@ -151,6 +151,7 @@ import values from 'licia/values'
 import viewportScale from 'licia/viewportScale'
 import wrap from 'licia/wrap'
 import xpath from 'licia/xpath'
+import cookie from 'licia/cookie'
 
 export {
   $,
@@ -188,6 +189,7 @@ export {
   concat,
   contain,
   copy,
+  cookie,
   create,
   createAssigner,
   dateFormat,
@@ -304,5 +306,5 @@ export {
   values,
   viewportScale,
   wrap,
-  xpath,
+  xpath
 }

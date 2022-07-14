@@ -259,6 +259,22 @@ export default class Resources extends Tool {
         }
         self._render()
       })
+      .on('click', '.eruda-add', function () {
+        const $this = $(this)
+        const type = $this.data('type')
+        let dataType = type
+        switch (type) {
+          case 'local':
+            dataType = 'localStorage'
+            break
+          case 'session':
+            dataType = 'sessionStorage'
+            break
+          case 'cookie':
+            break
+        }
+        showSources('input', '', { dataType });
+      })
       .on('click', '.eruda-delete-storage', function () {
         const $this = $(this)
         const key = $this.data('key')
@@ -278,14 +294,12 @@ export default class Resources extends Tool {
         const type = $this.data('type')
         const curValue = type === 'local' ? localStorage.getItem(key) : sessionStorage.getItem(key);
 
-        copy(curValue, function() {
           copy(curValue, function() {
             $this.addClass('eruda-icon-check').rmClass('eruda-icon-copy');
             setTimeout(function(){
               $this.addClass('eruda-icon-copy').rmClass('eruda-icon-check');
             }, 1500);
           });
-        });
       })
       .on('click', '.eruda-delete-cookie', function () {
         const key = $(this).data('key')
@@ -328,6 +342,7 @@ export default class Resources extends Tool {
         const $this = $(this)
         const key = $this.data('key')
         const type = $this.data('type')
+        const dataType = type === 'local' ? 'localStorage' : 'sessionStorage';
 
         const val =
           type === 'local'
@@ -335,15 +350,15 @@ export default class Resources extends Tool {
             : sessionStorage.getItem(key)
 
         try {
-          showSources('object', JSON.parse(val))
+          showSources('object', JSON.parse(val), { dataType, key });
         } catch (e) {
-          showSources('raw', val)
+          showSources('raw', val, { dataType, key });
         }
       })
       .on('click', '.eruda-img-link', function () {
         const src = $(this).attr('src')
 
-        showSources('img', src)
+        showSources('img', src, { dataType: 'img' })
       })
       .on('click', '.eruda-css-link', linkFactory('css'))
       .on('click', '.eruda-js-link', linkFactory('js'))
@@ -351,11 +366,11 @@ export default class Resources extends Tool {
 
     orientation.on('change', () => this._render())
 
-    function showSources(type, data) {
+    function showSources(type, data, extra) {
       const sources = container.get('sources')
       if (!sources) return
 
-      sources.set(type, data)
+      sources.set(type, data, extra)
 
       container.showTool('sources')
 
@@ -370,7 +385,7 @@ export default class Resources extends Tool {
         const url = $(this).attr('href')
 
         if (type === 'iframe' || !sameOrigin(location.href, url)) {
-          showSources('iframe', url)
+          showSources('iframe', url, { dataType: 'iframe' })
         } else {
           ajax({
             url,
