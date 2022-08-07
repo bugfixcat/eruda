@@ -10,6 +10,14 @@
     width: 100%;
     min-height: 100%;
   }
+  &[data-can-update=true] {
+    .raw-wrapper {
+      min-height: calc(100% - 66px);
+    }
+    .json {
+      min-height: calc(100% - 66px);
+    }
+  }
   .raw {
     user-select: text;
     padding: $padding;
@@ -79,12 +87,12 @@
   .sources-toolbar {
     display: flex;
     padding: 10px;
-    margin-bottom: 5px;
     position: sticky;
     top: 0px;
     z-index: 1000001;
     background: var(--darker-background);
     flex-direction: column;
+    border-bottom: 1px solid var(--border);
 
     .toolbar-content {
       display: flex;
@@ -95,7 +103,7 @@
       flex: 1;
       .tab-item {
         display: inline-block;
-        background: var(--operator-color);
+        background: var(--border);
         color: var(--contrast);
         margin-right: 10px;
         padding: 1px 5px;
@@ -133,7 +141,6 @@
     top: 65px;
     bottom: 0;
     width: 100%;
-    border-top: 1px solid var(--border);
     padding-bottom: 60px;
     &.active {
       height: 100%;
@@ -211,6 +218,7 @@
     bottom: 0;
     width: 100%;
     padding-bottom: 60px;
+    max-height: calc(100% - 41px);
 
     .input-items {
       height: 100%;

@@ -346,6 +346,9 @@ export default class Sources extends Tool {
     this._isInit = true
 
     const data = this._data
+    const $el = this._$el
+
+    $el.attr('data-can-update', false)
 
     switch (data.type) {
       case 'html':
@@ -437,6 +440,7 @@ export default class Sources extends Tool {
     } catch (e) {}
 
     if (this._canUpdate()) {
+      $el.attr('data-can-update', true); 
       $el.find('.eruda-sources-toolbar').rmClass('eruda-hide')
       $el.find('.eruda-value-input textarea').val(valStr)
       $el.find('.eruda-raw-value').text(valStr)
@@ -495,6 +499,7 @@ export default class Sources extends Tool {
     this._renderHtml(this._rawTpl({ val: valStr }))
 
     if (this._canUpdate()) {
+      $el.attr('data-can-update', true); 
       $el.find('.eruda-sources-toolbar').rmClass('eruda-hide')
       $el.find('.eruda-value-input textarea').val(valStr)
       $el.find('.eruda-size').text(`len: ${valStr.length}`)
