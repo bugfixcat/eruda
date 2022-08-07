@@ -1,0 +1,51 @@
+<div {{{class 'input-toolbar'}}}>
+	<div {{{class 'sources-type'}}}></div>
+</div>
+<div {{{class 'input-box'}}}>
+	<div {{{class 'input-items'}}}>
+	<div {{{class 'input-item item-key'}}}>
+		<div {{{class 'input-item-head'}}}>
+			Key
+			<input placeholder="key" {{{class 'input-key'}}} />
+		</div>
+	</div>
+	<div {{{class 'input-item item-value'}}}>
+		<div {{{class 'input-item-head'}}}>
+			Value
+    		<textarea placeholder="value" {{{class 'input-value'}}}></textarea>
+		</div>
+	</div>
+	<div {{{class 'input-item item-expires'}}}>
+		<div {{{class 'input-item-head'}}}>
+			Expires
+			<input value="2022-06-21 00:00:00" {{{class 'input-date'}}} readonly />
+		</div>
+		<div {{{class 'input-container hide'}}}>
+			<div {{{class 'input-date-wrapper'}}}>
+				<input placeholder="year" data-type="year" {{{class 'input-date-year'}}} /> /
+				<input placeholder="month" data-type="month" {{{class 'input-date-month'}}} /> /
+				<input placeholder="day" data-type="day" {{{class 'input-date-day'}}} />&nbsp;
+				<input placeholder="hour" data-type="hours" {{{class 'input-date-hour'}}} />:
+				<input placeholder="minute" data-type="minutes" {{{class 'input-date-minute'}}} />:
+				<input placeholder="seconds" data-type="seconds" {{{class 'input-date-seconds'}}} />
+			</div>
+		</div>
+	</div>
+	<div {{{class 'input-item item-domain'}}}>
+		<div {{{class 'input-item-head'}}}>
+			Domain
+			<input placeholder="domain" {{{class 'input-domain'}}} />
+		</div>
+	</div>
+	<div {{{class 'input-item item-path'}}}>
+		<div {{{class 'input-item-head'}}}>
+			Path
+			<input placeholder="path" value="/" {{{class 'input-path'}}} />
+		</div>
+	</div>
+	</div>
+    <div {{{class 'input-btns'}}}>
+      <div {{{class 'button input-cancel'}}}>Cancel</div>
+      <div {{{class 'button input-update'}}}>Add</div>
+    </div>
+</div>

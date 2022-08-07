@@ -10,9 +10,18 @@
     width: 100%;
     min-height: 100%;
   }
+  &[data-can-update=true] {
+    .raw-wrapper {
+      min-height: calc(100% - 66px);
+    }
+    .json {
+      min-height: calc(100% - 66px);
+    }
+  }
   .raw {
     user-select: text;
     padding: $padding;
+    word-break: break-word;
   }
   .code {
     font-size: $font-size-s;
@@ -64,5 +73,246 @@
   iframe {
     width: 100%;
     height: 100%;
+  }
+  .hide {
+    display: none !important;
+  }
+
+  input, textarea {
+    user-select: text;
+    font-size: $font-size;
+    color: var(--primary);
+    background: transparent;
+  }
+  .sources-toolbar {
+    display: flex;
+    padding: 10px;
+    position: sticky;
+    top: 0px;
+    z-index: 1000001;
+    background: var(--darker-background);
+    flex-direction: column;
+    border-bottom: 1px solid var(--border);
+
+    .toolbar-content {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sources-tab {
+      flex: 1;
+      .tab-item {
+        display: inline-block;
+        background: var(--border);
+        color: var(--contrast);
+        margin-right: 10px;
+        padding: 1px 5px;
+        font-size: 12px;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &.active {
+          background: var(--primary);
+        }
+      }
+    }
+
+    .size {
+      display: inline-block;
+      font-size: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0px 5px;
+      cursor: pointer;
+    }
+
+    .sources-type {
+      padding: 5px 0;
+      font-size: 12px;
+    } 
+  }
+  .value-input {
+    pointer-events: none;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 65px;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 60px;
+    &.active {
+      height: 100%;
+      padding-top: 40px;
+      padding-bottom: 60px;
+      border-top: none;
+      .icon-arrow-right {
+        display: none;
+      }
+      textarea {
+        padding-left: 10px;
+      }
+    }
+    .buttons {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      color: var(--primary);
+      background: var(--darker-background);
+      font-size: $font-size-s;
+      border-top: 1px solid var(--border);
+      .button {
+        pointer-events: all;
+        cursor: pointer;
+        width: 50%;
+        display: inline-block;
+        text-align: center;
+        border-right: 1px solid var(--border);
+        height: 60px;
+        line-height: 60px;
+        &:last-child {
+          border-right: none;
+        }
+        transition: background $anim-duration, color $anim-duration;
+        &:active {
+          color: var(--select-foreground);
+          background: var(--highlight);
+        }
+      }
+    }
+    textarea {
+      pointer-events: all;
+      padding: 3px 10px;
+      outline: none;
+      border: none;
+      font-size: $font-size;
+      width: 100%;
+      height: 100%;
+      user-select: text;
+      resize: none;
+      color: var(--primary);
+      background: var(--background);
+    }
+  }
+  .raw-value {
+    padding: 3px 10px;
+    word-break: break-word;
+    font-size: 12px;
+  }
+
+  .input-toolbar {
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background: var(--darker-background);
+  }
+  .input-box {
+    pointer-events: none;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 40px;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 60px;
+    max-height: calc(100% - 41px);
+
+    .input-items {
+      height: 100%;
+      overflow-y: auto;
+      user-select: all;
+    }
+
+    .input {
+      width: 100%;
+      border: none;
+      outline: 0;
+    }
+    .input-btns {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      color: var(--primary);
+      background: var(--darker-background);
+      font-size: $font-size-s;
+      border-top: 1px solid var(--border);
+      .button {
+        pointer-events: all;
+        cursor: pointer;
+        width: 50%;
+        display: inline-block;
+        text-align: center;
+        border-right: 1px solid var(--border);
+        height: 60px;
+        line-height: 60px;
+        &:last-child {
+          border-right: none;
+        }
+        transition: background $anim-duration, color $anim-duration;
+        &:active {
+          color: var(--select-foreground);
+          background: var(--highlight);
+        }
+      }
+    }
+    textarea {
+      pointer-events: all;
+      outline: none;
+      border: none;
+      width: 100%;
+      user-select: text;
+      resize: none;
+      color: var(--primary);
+      background: var(--background);
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .input-box[data-type="localStorage"],
+  .input-box[data-type="sessionStorage"] {
+    textarea {
+      height: 100px;
+    }
+    .item-expires,
+    .item-domain,
+    .item-path {
+      display: none;
+    }
+  }
+
+  .input-item {
+    border-bottom: 1px solid var(--border); 
+    padding: 0px;
+    user-select: all;
+
+    input, textarea {
+      border: none;
+      outline: 0;
+      text-align: right;
+      flex: 1;
+    }
+  }
+  .input-item-head {
+    display: flex;
+    padding: 0 10px;
+    line-height: 40px;
+  }
+  .input-container {
+    border-top: 1px solid var(--border); 
+    padding: 10px 10px;
+  }
+  .input-date-wrapper {
+    text-align: center;
+    input {
+      width: 50px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
   }
 }
